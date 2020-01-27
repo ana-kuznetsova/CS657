@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH -p dl
+#SBATCH --gres=gpu:v100:1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=12
+#SBATCH --time=2-00:00:00
+#SBATCH -o speech_out_%j.out
+#SBATCH -e speech_error_%j.err
+#SBATCH --mail-user=anakuzne@iu.edu
+#SBATCH --mail-type=ALL
+#SBATCH -J SP_Preproc
+
+module load deeplearning/1.13.1
+module load libsndfile/1.0.28
+cd /N/u/anakuzne/Carbonate/dl_for_speech/HW3_II
+
+python /N/u/anakuzne/Carbonate/dl_for_speech/HW3_II/py/normalization.py -t /N/u/anakuzne/Carbonate/dl_for_speech/HW3_II/IEEE/npy/train_frame -d /N/u/anakuzne/Carbonate/dl_for_speech/HW3_II/IEEE/npy/dev_frame -o /N/u/anakuzne/Carbonate/dl_for_speech/HW3_III/
